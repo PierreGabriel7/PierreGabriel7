@@ -24,6 +24,7 @@ I did quite a lot of front-end development on my first year, wish let me gather 
 ---                                                                
             
 **Techs I've worked with:** 
+- <img src="https://symfony.com/images/opengraph/symfony.png" width="25px"> Symfony
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/768px-HTML5_logo_and_wordmark.svg.png" width="25px"> HTML  
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png" width="25px"> CSS  
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png" width="25px"> Javascript  
@@ -38,7 +39,6 @@ I did quite a lot of front-end development on my first year, wish let me gather 
 **I'm curently learning:** 
                                                                 
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width="25px"> React
-- <img src="https://symfony.com/images/opengraph/symfony.png" width="25px"> Symfony
 
 --- 
 
