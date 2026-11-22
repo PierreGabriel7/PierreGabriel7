@@ -46,8 +46,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git diff --quiet || (git commit -am "chore: update age" && git push)
 
-      # The profile bio can't be changed with the default GITHUB_TOKEN,
-      # so this step needs a personal access token saved as the BIO_TOKEN secret.
       - name: Update GitHub bio
         env:
           AGE: ${{ steps.age.outputs.age }}
@@ -58,7 +56,7 @@ jobs:
           import json, os, urllib.request
           age = os.environ["AGE"]
           # GitHub bios are limited to 160 characters.
-          bio = f"{age} year-old junior developer. I am currently in the third and last year of a bachelor's degree in web development."
+          bio = f"{age} year-old junior web developer from Liège with a bachelor's degree in web development."
           req = urllib.request.Request(
               "https://api.github.com/user",
               data=json.dumps({"bio": bio}).encode(),
