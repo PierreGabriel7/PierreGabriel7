@@ -14,7 +14,8 @@ In my first year I did a lot of front-end development, which gave me solid exper
 ### 🛠️ Technologies I've worked with
 
 <p align="left">
-  <img src="https://skillicons.dev/icons?i=symfony,html,css,js,php,sass,apache,mysql" alt="Symfony, HTML, CSS, JavaScript, PHP, Sass, Apache, MySQL" />
+  <img src="https://skillicons.dev/icons?i=symfony,html,css,js,php,sass,mysql" alt="Symfony, HTML, CSS, JavaScript, PHP, Sass, MySQL" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg" alt="Apache" title="Apache" width="48" height="48" />
 </p>
 
 ### 🌱 Currently learning
