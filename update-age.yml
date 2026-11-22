@@ -1,0 +1,73 @@
+name: Update age in README and bio
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # every day at midnight UTC
+  workflow_dispatch: # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-age:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute age
+        id: age
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import datetime
+          birth = datetime.date(1995, 1, 13)
+          today = datetime.date.today()
+          age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
+          print(f"age={age}")
+          EOF
+
+      - name: Update README
+        env:
+          AGE: ${{ steps.age.outputs.age }}
+        run: |
+          python3 - <<'EOF'
+          import os, re
+          age = os.environ["AGE"]
+          path = "README.md"
+          with open(path, encoding="utf-8") as f:
+              text = f.read()
+          text = re.sub(r"<!--AGE-->.*?<!--/AGE-->", f"<!--AGE-->{age}<!--/AGE-->", text)
+          with open(path, "w", encoding="utf-8") as f:
+              f.write(text)
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --quiet || (git commit -am "chore: update age" && git push)
+
+      # The profile bio can't be changed with the default GITHUB_TOKEN,
+      # so this step needs a personal access token saved as the BIO_TOKEN secret.
+      - name: Update GitHub bio
+        env:
+          AGE: ${{ steps.age.outputs.age }}
+          BIO_TOKEN: ${{ secrets.BIO_TOKEN }}
+        if: env.BIO_TOKEN != ''
+        run: |
+          python3 - <<'EOF'
+          import json, os, urllib.request
+          age = os.environ["AGE"]
+          # GitHub bios are limited to 160 characters.
+          bio = f"{age} year-old junior developer. I am currently in the third and last year of a bachelor's degree in web development."
+          req = urllib.request.Request(
+              "https://api.github.com/user",
+              data=json.dumps({"bio": bio}).encode(),
+              method="PATCH",
+              headers={
+                  "Authorization": f"Bearer {os.environ['BIO_TOKEN']}",
+                  "Accept": "application/vnd.github+json",
+              },
+          )
+          with urllib.request.urlopen(req) as r:
+              print("Bio updated:", json.load(r)["bio"])
+          EOF
